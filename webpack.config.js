@@ -9,10 +9,35 @@ module.exports = {
     filename: 'bundle.js' // nome do arquivo
   },
   resolve: { // extensões que dará suporte
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.scss'],
     alias: { // modularização do paths de import
       '@': path.join(__dirname, 'src')
     }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts(x?)$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
+      },{
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true // permite que quando faça import de um estilo, as classes dele possam ser usadas com javascript
+            }
+          },
+          {
+            loader: 'sass-loader'
+          },
+        ]
+      }
+    ]
   },
   devServer: {
     contentBase: './public', // determina o diretorio que será todado no navegador
