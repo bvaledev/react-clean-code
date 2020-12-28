@@ -13,7 +13,7 @@ module.exports = {
   transform: {
     '.+\\.ts$': 'ts-jest'
   },
-  moduleNameMAPPER: {
+  moduleNameMapper : {
     '@/(.*)': '<rootDir>/src/$1'
   }
 }
