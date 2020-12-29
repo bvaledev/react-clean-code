@@ -3,7 +3,7 @@ import Styles from './input-styles.scss'
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-const Footer: React.FC<Props> = (props: Props) => {
+const Input: React.FC<Props> = (props: Props) => {
   return (
     <>
       <div className={Styles.inputWrap}>
@@ -14,4 +14,4 @@ const Footer: React.FC<Props> = (props: Props) => {
   )
 }
 
-export default Footer
+export default Input

@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs'
 import React from 'react'
 import Styles from './spinner-styles.scss'
 

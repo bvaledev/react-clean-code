@@ -1,6 +1,6 @@
-import React, { memo } from 'react'
+import React from 'react'
 import Styles from './form-status-styles.scss'
-import Spinner from '@/presentation/components/spinner/spinner'
+import { Spinner } from '@/presentation/components'
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
