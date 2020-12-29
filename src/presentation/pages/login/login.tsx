@@ -7,26 +7,24 @@ import { Validation } from '@/presentation/protocols/validation'
 type Props = {
   validation: Validation
 }
+
 const Login: React.FC<Props> = ({ validation }: Props) => {
   const [state, setState] = useState({
     isLoading: false,
     email: '',
     password: '',
-    emailError: '',
-    passwordError: 'Campo obrigatório',
+    emailError: 'Campo Obrigatório',
+    passwordError: 'Campo Obrigatório',
     mainError: ''
   })
 
   useEffect(() => {
     setState({
       ...state,
-      emailError: validation.validate('email', state.email)
+      emailError: validation.validate('email', state.email),
+      passwordError: validation.validate('password', state.password)
     })
-  }, [state.email])
-
-  useEffect(() => {
-    validation.validate('password', state.password)
-  }, [state.password])
+  }, [state.email, state.password])
 
   return (
     <>
