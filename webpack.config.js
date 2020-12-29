@@ -43,9 +43,9 @@ module.exports = {
     contentBase: './public', // determina o diretorio que será todado no navegador
     writeToDisk: true, // armazena o build em memoria e em disco
     historyApiFallback: true, // permite que detecte as rotas
-    port: 8080,
-    open: true,
-    liveReload: true,
+    port: 8080, // obvio
+    open: true, // fala pro desgraçado abrir o link no navegador
+    liveReload: true // atualização em tempo real
   },
   externals: { // as bibliotecas que tem aqui, não são incluidas no bundle
     react: 'React',
