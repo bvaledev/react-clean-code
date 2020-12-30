@@ -3,9 +3,7 @@ import Styles from './form-status-styles.scss'
 import { Spinner } from '@/presentation/components'
 import FormContext from '@/presentation/context/form-context/form-context'
 
-type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-
-const FormStatus: React.FC<Props> = (props: Props) => {
+const FormStatus: React.FC = () => {
   const { state } = useContext(FormContext)
   const { isLoading, mainError } = state
   return (
