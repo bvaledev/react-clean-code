@@ -8,4 +8,10 @@ describe('Email Validator', () => {
     const error = sut.validate('')
     expect(error).toEqual(new InvalidFieldError('email'))
   })
+
+  test('Should return falsy if email is valid', () => {
+    const sut = new EmailValidator('email')
+    const error = sut.validate(faker.internet.email())
+    expect(error).toBeFalsy()
+  })
 })
