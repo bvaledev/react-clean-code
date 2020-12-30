@@ -1,12 +1,10 @@
 module.exports = {
   roots: ['<rootDir>/src'],
-  globals: {
-    'ts-jest': {
-     // "isolatedModules": false,
-    }
-  },
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
+    '!<rootDir>/src/main/**',
+    '!<rootDir>/src/presentation/components/router/router.tsx',
+    '!**/index.ts',
     '!**/*.d.ts'
   ],
   coverageDirectory: 'coverage',
@@ -14,7 +12,7 @@ module.exports = {
   transform: {
     '.+\\.(ts|tsx)$': 'ts-jest'
   },
-  moduleNameMapper : {
+  moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
     '\\.scss$': 'identity-obj-proxy' // identity-obj-proxy usa um teste double gerando um dummy {} para nao interferir no teste
   }
