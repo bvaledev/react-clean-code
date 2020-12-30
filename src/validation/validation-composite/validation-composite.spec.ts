@@ -2,10 +2,11 @@ import { ValidationComposite } from './validation-composite'
 import { FieldValidationSpy } from '@/validation/test'
 import { FieldValidation } from '../protocols'
 
-const makeValidators = (error: Error = null): FieldValidation[] => {
+const makeValidators = (error1: Error = null, error2: Error = null): FieldValidation[] => {
   const fieldValidationSpy = new FieldValidationSpy('any_field')
+  fieldValidationSpy.error = error1
   const fieldValidationSpy2 = new FieldValidationSpy('any_field')
-  fieldValidationSpy2.error = error
+  fieldValidationSpy2.error = error2
 
   return [
     fieldValidationSpy,
@@ -15,8 +16,14 @@ const makeValidators = (error: Error = null): FieldValidation[] => {
 
 const makeSut = (validators: FieldValidation[]): ValidationComposite => new ValidationComposite(validators)
 describe('Validation Composite', () => {
-  test('Should return error if any validation return an error', () => {
+  test('Should return error if first validator return an error', () => {
     const sut = makeSut(makeValidators(new Error('any_error_message')))
+    const error = sut.validate('any_field', 'any_value')
+    expect(error).toBe('any_error_message')
+  })
+
+  test('Should return error if second validator return an error', () => {
+    const sut = makeSut(makeValidators(null, new Error('any_error_message')))
     const error = sut.validate('any_field', 'any_value')
     expect(error).toBe('any_error_message')
   })
