@@ -19,8 +19,12 @@ module.exports = {
       {
         test: /\.ts(x?)$/,
         loader: 'ts-loader',
-        exclude: /node_modules/
-      },{
+        exclude: [
+          /node_modules/,
+          /\.spec.(ts|tsx)$/,
+          /\.test.(ts|tsx)$/
+        ]
+      }, {
         test: /\.scss$/,
         use: [
           {
@@ -34,7 +38,7 @@ module.exports = {
           },
           {
             loader: 'sass-loader'
-          },
+          }
         ]
       }
     ]
