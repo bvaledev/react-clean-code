@@ -1,4 +1,5 @@
 const path = require('path')
+const { EnvironmentPlugin } = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin') // plugin que limpa o cache do webpack / recomendado
 module.exports = {
   mode: 'development',
@@ -56,6 +57,9 @@ module.exports = {
     'react-dom': 'ReactDOM'
   },
   plugins: [ // usa os plugins packages
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new EnvironmentPlugin({
+      API_URL: 'http://fordevs.herokuapp.com/api'
+    })
   ]
 }
