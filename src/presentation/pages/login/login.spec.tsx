@@ -1,9 +1,11 @@
 import React from 'react'
+import faker from 'faker'
+import { Router } from 'react-router'
+import { createMemoryHistory } from 'history'
 import 'jest-localstorage-mock'
+import Login from './login'
 import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
 import { ValidationStub, AuthenticationSpy } from '@/presentation/test'
-import faker from 'faker'
-import Login from './login'
 import { InvalidCredentialsError } from '@/domain/errors'
 
 type SutTypes = {
@@ -39,11 +41,16 @@ const simulateStatusForField = (sut: RenderResult, fieldName: string, validation
   expect(fieldStatus.textContent).toBe(validationError ? '❌' : '✅')
 }
 
+const history = createMemoryHistory()
 const makeSut = (params?: SutParams): SutTypes => {
   const authenticationSpy = new AuthenticationSpy()
   const validationStub = new ValidationStub()
   validationStub.errorMessage = params?.validationError
-  const sut = render(<Login validation={validationStub} authentication={authenticationSpy} />)
+  const sut = render(
+    <Router history={history}>
+      <Login validation={validationStub} authentication={authenticationSpy} />
+    </Router>
+  )
   return {
     sut,
     validationStub,
@@ -154,5 +161,13 @@ describe('Login Page', () => {
     simulateValidSubmit(sut)
     await waitFor(() => sut.getByTestId('form'))
     expect(localStorage.setItem).toHaveBeenCalledWith('accessToken', authenticationSpy.account.accessToken)
+  })
+
+  test('Should go to signUp page', () => {
+    const { sut } = makeSut()
+    const register = sut.getByTestId('register')
+    fireEvent.click(register)
+    expect(history.length).toBe(2)
+    expect(history.location.pathname).toBe('/signup')
   })
 })
