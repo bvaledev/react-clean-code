@@ -1,14 +1,14 @@
 import { LocalSaveAccessToken } from './local-save-access-token'
-import { SetStorageSpy } from '@/data/test/mock-storage'
+import { SetStorageMock } from '@/data/test/mock-storage'
 import faker from 'faker'
 
 type SutType = {
   sut: LocalSaveAccessToken
-  setStorage: SetStorageSpy
+  setStorage: SetStorageMock
 }
 
 const makeSut = (): SutType => {
-  const setStorage = new SetStorageSpy()
+  const setStorage = new SetStorageMock()
   const sut = new LocalSaveAccessToken(setStorage)
   return {
     sut,
